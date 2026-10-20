@@ -1,0 +1,9 @@
+/journals
+.vscode/
+*.tar.gz
+vault.yml
+*.pyc
+__pycache__/
+.venv/
+.ansible/*
+.omo/*
