@@ -71,6 +71,21 @@ nova. Rodar `declare.py log` em cada tarefa parece burocracia; é o que
 transforma a declaração final em relatório gerado em vez de reconstrução de
 memória meses depois.
 
+**Backfill de sessões antigas (omp):** sem log contemporâneo, `import`
+reconstrói entradas dos transcripts do omp (`~/.omp/agent/sessions/`), 1
+entrada por prompt do usuário, com `ferramenta` e `ts` extraídos do
+transcript, `fase_pesquisa` inferida por keywords e `verificacao` marcada
+"a revisar". É reconstrução com evidência de máquina — revise as fases
+classificadas antes do `render`:
+
+```sh
+python3 declare.py import --dry-run          # prévia, sem gravar
+python3 declare.py import                    # importa sessões do projeto atual
+python3 declare.py import --project ~/outro-projeto
+```
+
+Idempotente: sessões já importadas (campo `fonte`) são puladas.
+
 ### Gate 3 — Verificação (Art. 9º, II, h/i; Art. 33, I)
 
 Referência, dado numérico ou fato que VOCÊ produzir nasce `unverified`.

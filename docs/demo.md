@@ -135,6 +135,23 @@ python3 .omp/skills/iag-disclosure/scripts/declare.py render
 > interativa (`omp` sem `-p`) o fluxo roda sem esse limite. Subagentes não foram
 > usados (Gate 1 veda enviá-los com texto de terceiros; aqui nem houve texto alheio).
 
+### 2.3 Backfill: importar sessões antigas do omp
+
+Para trabalhos iniciados **sem** o log contemporâneo, o `import` reconstrói as
+entradas a partir dos transcripts de sessão do omp (`~/.omp/agent/sessions/`):
+1 entrada por prompt do usuário, `ferramenta` e `ts` lidos do transcript,
+`fase_pesquisa` inferida por keywords, `verificacao` marcada "a revisar".
+Idempotente (sessões já importadas são puladas via campo `fonte`):
+
+```sh
+python3 .omp/skills/iag-disclosure/scripts/declare.py import --dry-run  # prévia
+python3 .omp/skills/iag-disclosure/scripts/declare.py import            # grava
+python3 .omp/skills/iag-disclosure/scripts/declare.py render            # declaração
+```
+
+É reconstrução com evidência de máquina, não log contemporâneo: revise as
+fases classificadas e a lista de sessões antes de assinar a declaração.
+
 ---
 
 ## 3. Geração final das declarações
